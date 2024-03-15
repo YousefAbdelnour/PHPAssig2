@@ -26,6 +26,7 @@ class Profile extends \app\core\Controller
             $this->view('Profile/create');
         }
     }
+    #[\app\filters\HasProfile]
     public function modify()
     {
         $profile = new \app\models\Profile();

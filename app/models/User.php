@@ -5,7 +5,9 @@ namespace app\models;
 use PDO;
 
 class User extends \app\core\Model //By: Rowan
-{
+{// implement all the crud operations here (create read update delete) and the login logic is in the controller
+
+    //all good, look at my comments and youre good, rest is perfect
 
     public $userId; 
     public $username; 
@@ -13,13 +15,13 @@ class User extends \app\core\Model //By: Rowan
 
     //create method creates a new user in the database. 
     public function create()
-    {
-        $SQL = 'INSERT INTO user(userId,username,passhash); 
-        VALUE (:userId,:username,:passhash)';
+    {// removed userid from being inserted because it is auto incremented in the database so no need to even define it.
+        // field is there when the class is fetched from the database not vice versa
+        $SQL = 'INSERT INTO user(username,passhash); 
+        VALUE (:username,:passhash)';
         $STMT = self::$_conn->prepare($SQL);
         $STMT->execute(
             [
-                'userId' => $this->userId,
                 'username' => $this->username,
                 'pass' => $this->passhash,
             ]
@@ -56,7 +58,3 @@ class User extends \app\core\Model //By: Rowan
 
 
 }
-
-?> 
-
-
