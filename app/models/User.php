@@ -1,5 +1,7 @@
 <?php 
 
+namespace app\models;
+
 use PDO;
 
 class User extends \app\core\Model //By: Rowan
