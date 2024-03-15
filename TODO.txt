@@ -1,0 +1,12 @@
+
+General: 
+
+    - Add data to database
+
+Comment: 
+
+    - Create model/controller for comment 
+
+User: 
+
+    - Take username and password out of URL 
