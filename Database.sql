@@ -58,6 +58,7 @@ CREATE TABLE `publication` (
 
 CREATE TABLE `publication_comment` (
   `publication_comment_id` int(11) NOT NULL,
+  `comment_text` varchar(225) NOT NULL,
   `profile_id` int(11) NOT NULL,
   `publication_id` int(11) NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
