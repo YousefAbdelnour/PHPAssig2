@@ -28,6 +28,18 @@ class Publication extends \app\core\Model
             ]
         );
     }
+    public function getById()
+    {
+        $SQL = 'SELECT * FROM publication WHERE publication_status 
+        = :publication_status AND publication_id = :publication_id';
+        $STMT = self::$_conn->prepare($SQL);
+        $STMT->execute([
+            'publication_status' => true,
+            'publication_id' => $this->id
+        ]);
+        $STMT->setFetchMode(PDO::FETCH_CLASS, 'app\models\Publication');
+        return $STMT->fetchAll();
+    }
     public function getAll()
     {
         $SQL = 'SELECT * FROM publication WHERE publication_status = :publication_status';
