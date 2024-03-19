@@ -50,14 +50,6 @@ class Comment extends \app\core\Model
         return $STMT->fetch();
     }
 
-    public function getByPublication($publication_id){
-        $SQL = 'SELECT * FROM publication_comment WHERE publication_id = :publication_id';
-        $STMT = self::$_conn->prepare($SQL);
-        $STMT->execute(['publication_id' => $publication_id]);
-        $STMT->setFetchMode(PDO::FETCH_CLASS, 'app\models\Comment');
-        return $STMT->fetchAll();
-    }
-
     public function update(){
         $SQL = 'UPDATE publication_comment SET comment_text=:comment_text, timestamp=:timestamp WHERE publication_comment_id = :comment_id';
         $STMT = self::$_conn->prepare($SQL);

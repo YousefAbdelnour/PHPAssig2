@@ -82,6 +82,15 @@ class Publication extends \app\core\Model
         $STMT->setFetchMode(PDO::FETCH_CLASS, 'app\models\Publication');
         return $STMT->fetchAll();
     }
+
+    public function getByPublication(){
+        $SQL = 'SELECT * FROM publication_comment WHERE publication_id = :publication_id';
+        $STMT = self::$_conn->prepare($SQL);
+        $STMT->execute(['publication_id' => $this->id]);
+        $STMT->setFetchMode(PDO::FETCH_CLASS, 'app\models\Comment');
+        return $STMT->fetchAll();
+    }
+
     public function edit()
     {
         $SQL = 'UPDATE publication SET publication_title=:publication_title,
