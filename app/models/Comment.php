@@ -39,7 +39,7 @@ class Comment extends \app\core\Model
         $STMT = self::$_conn->prepare($SQL);
         $STMT->execute(['profile_id' => $profile_id]);
         $STMT->setFetchMode(PDO::FETCH_CLASS, 'app\models\Comment');
-        return $STMT->fetch();
+        return $STMT->fetchAll();
     }
 
     public function getByCommentID($comment_id){
@@ -48,6 +48,14 @@ class Comment extends \app\core\Model
         $STMT->execute(['comment_id' => $comment_id]);
         $STMT->setFetchMode(PDO::FETCH_CLASS, 'app\models\Comment');
         return $STMT->fetch();
+    }
+
+    public function getByPublication($publication_id){
+        $SQL = 'SELECT * FROM publication_comment WHERE publication_id = :publication_id';
+        $STMT = self::$_conn->prepare($SQL);
+        $STMT->execute(['publication_id' => $publication_id]);
+        $STMT->setFetchMode(PDO::FETCH_CLASS, 'app\models\Comment');
+        return $STMT->fetchAll();
     }
 
     public function update(){
