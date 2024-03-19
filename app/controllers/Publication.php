@@ -1,9 +1,6 @@
 <?php
 
 namespace app\controllers;
-
-#[\app\filters\HasProfile]
-#[\app\filters\Login]
 class Publication extends \app\core\Controller //by youssef
 {
     public function index()

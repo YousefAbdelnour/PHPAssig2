@@ -11,7 +11,7 @@ class Model
 	public function __construct()
 	{
 		$host = 'localhost';
-		$dbname = 'ecommerce';
+		$dbname = 'Database';
 		$user = 'root';
 		$pass = '';
 		try {

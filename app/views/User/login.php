@@ -26,12 +26,13 @@
     <h1>Log In</h1>
 
     <!-- Login page -->
-    <form action="/app/controllers/User.php" method="post">
+    <form method='post' action=''>
         <label for="username">First name:</label><br>
         <input type="text" id="username" name="username"><br>
         <label for="password">Last name:</label><br>
         <input type="password" id="password" name="password">
         <input type="submit">
+        <a href='/User/register'>I have no account, bring me to the registration page</a>
         <div id="failed">
             <?php
             if ($data == false) {

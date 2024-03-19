@@ -2,18 +2,16 @@
 
 namespace app\controllers;
 
-// Import the User class from the models namespace
-//removed the use line to allow class to be called User only for the routes to work -youssef
 class User extends \app\core\Controller
-{ //By: Rowan 
-
+{
     public function register()
     {
+        echo ('inside register function');
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Create an instance of the User class
             $user = new \app\models\User();
 
-            $user->userId = $_POST['userId'];
             $user->username = $_POST['username'];
             // Hashing the password 
             $user->passhash = password_hash($_POST['password'], PASSWORD_DEFAULT);
@@ -30,16 +28,24 @@ class User extends \app\core\Controller
     // (in this case use the read function and then verify here not there, its more optimal and good practice.)
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Create an instance of the User class
+            //log the user in... if the password is right
+            //get the user from the database
+            $username = $_POST['username'];
             $user = new \app\models\User();
-            if ($user->login()) {
-                //if the log in is successful it redirects to the index page of publication 
-                header('Location:/Publication/index'); //dont put the whole path or .php, it doesnt work
+            $user->username = $username;
+            $user = $user->getByUsername();
+            //check the password against the hash
+            $password = $_POST['password'];
+            if ($user && password_verify($password, $user->password_hash)) {
+                //remember that this is the user logging in...
+                $_SESSION['user_id'] = $user->user_id;
+
+                header('location:/Profile/index');
             } else {
-                $this->view('User/login', false); //to display login failed message with an if statement
+                header('location:/User/login', false);
             }
         } else {
-            $this->view('User/login', true); //not yet tried to login so true
+            $this->view('User/login', true);
         }
     }
 }

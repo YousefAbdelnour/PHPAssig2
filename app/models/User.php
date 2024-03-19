@@ -1,60 +1,64 @@
-<?php 
+<?php
 
 namespace app\models;
 
 use PDO;
 
 class User extends \app\core\Model //By: Rowan
-{// implement all the crud operations here (create read update delete) and the login logic is in the controller
-
-    //all good, look at my comments and youre good, rest is perfect
-
-    public $userId; 
-    public $username; 
-    public $passhash; 
-
-    //create method creates a new user in the database. 
+{
+    public $userId;
+    public $username;
+    public $passhash;
     public function create()
-    {// removed userid from being inserted because it is auto incremented in the database so no need to even define it.
-        // field is there when the class is fetched from the database not vice versa
-        $SQL = 'INSERT INTO user(username,passhash); 
-        VALUE (:username,:passhash)';
+    {
+        $SQL = 'INSERT INTO user(username, password_hash) 
+        VALUE (:username, :password_hash)';
+        $STMT = self::$_conn->prepare($SQL);
+        $STMT->execute([
+            'username' => $this->username,
+            'password_hash' => $this->passhash,
+        ]);
+    }
+    public function update()
+    {
+
+        $SQL = 'UPDATE user SET username=:username, password_hash=:password_hash
+        WHERE user_id=:user_id';
         $STMT = self::$_conn->prepare($SQL);
         $STMT->execute(
             [
+                'user_id' => $this->userId,
                 'username' => $this->username,
-                'pass' => $this->passhash,
+                'password_hash' => $this->passhash
             ]
         );
     }
-
-    public function login()
+    public function delete()
     {
-        //check if username and password are provided
-        if (!isset($_POST['username']) || !isset($_POST['password'])) {
-            return false;
-        }
-
-        //creates two different variables for the username and password comparison 
-        $enteredUsername = $_POST['username'];
-        $enteredPassword = $_POST['password'];
-
-        //select statement to see that the username exists 
-        $sql = "SELECT * FROM user WHERE username = :username";
-        // connects and prepares the statement written above 
-        $stmt = self::$_conn->prepare($sql);
-        $stmt->execute(['username' => $enteredUsername]);
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        //checks if user exists and password matches the hashed password stored in the system 
-        if ($user && password_verify($enteredPassword, $user['passhash'])) {
-            return true;
-        } else {
-            //if the if statement isn't triggered, it means the password isn't recognized
-            return false;
-        }
+        $SQL = 'DELETE FROM profile WHERE user_id = :user_id';
+        $STMT = self::$_conn->prepare($SQL);
+        $STMT->execute(
+            ['user_id' => $this->userId]
+        );
     }
-
-
-
+    public function getById()
+    {
+        $SQL = 'SELECT * FROM user WHERE user_id = :user_id';
+        $STMT = self::$_conn->prepare($SQL);
+        $STMT->execute(
+            ['user_id' => $this->userId]
+        );
+        $STMT->setFetchMode(PDO::FETCH_CLASS, 'app\models\profile');
+        return $STMT->fetch();
+    }
+    public function getByUsername()
+    {
+        $SQL = 'SELECT * FROM user WHERE username = :username';
+        $STMT = self::$_conn->prepare($SQL);
+        $STMT->execute(
+            ['username' => $this->username]
+        );
+        $STMT->setFetchMode(PDO::FETCH_CLASS, 'app\models\profile');
+        return $STMT->fetch();
+    }
 }
