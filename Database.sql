@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 19, 2024 at 08:44 PM
+-- Generation Time: Mar 21, 2024 at 12:45 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -40,7 +40,8 @@ CREATE TABLE `profile` (
 --
 
 INSERT INTO `profile` (`profile_id`, `user_id`, `first_name`, `middle_name`, `last_name`) VALUES
-(1, 1, 'dawg', 'diggity', 'dawgg');
+(1, 1, 'edited', 'diggity', 'dawgg'),
+(11, 1, 'Yousef', 'dsas', 'Abdelnour');
 
 -- --------------------------------------------------------
 
@@ -52,10 +53,20 @@ CREATE TABLE `publication` (
   `publication_id` int(11) NOT NULL,
   `profile_id` int(11) NOT NULL,
   `publication_title` varchar(255) NOT NULL,
-  `publication_text` int(255) NOT NULL,
+  `publication_text` varchar(255) NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `publication_status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `publication`
+--
+
+INSERT INTO `publication` (`publication_id`, `profile_id`, `publication_title`, `publication_text`, `timestamp`, `publication_status`) VALUES
+(1, 1, 'test', 'tewsgsdfgdfg', '2024-03-21 00:19:05', 1),
+(2, 1, 'test', 'sdfsdfg', '2024-03-21 00:19:18', 0),
+(3, 1, 'test', 'sdfsdfg', '2024-03-21 00:20:24', 0),
+(4, 1, 'test', 'sdfsdfg', '2024-03-21 00:20:28', 1);
 
 -- --------------------------------------------------------
 
@@ -89,7 +100,8 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`user_id`, `username`, `password_hash`) VALUES
 (1, 'admin', '$2y$10$EMMng5TVPO4GRoD0mexdPeMWnpv0kiIgch2K7XnriGWrMN5tYbP/G'),
-(2, 'fuked', '$2y$10$11DCUPZhZn6HddcibP4lhONgxFgrUUqyiAEPyMOltG9urZX4jSq5q');
+(2, 'fuked', '$2y$10$11DCUPZhZn6HddcibP4lhONgxFgrUUqyiAEPyMOltG9urZX4jSq5q'),
+(7, 'alhamdulilah', '$2y$10$YdcFnqVgN5qjvuhFXSfYx.gkgnC.f6v0e1uJBnTjoEN94ergGQ.Jq');
 
 --
 -- Indexes for dumped tables
@@ -132,13 +144,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `profile`
 --
 ALTER TABLE `profile`
-  MODIFY `profile_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `profile_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `publication`
 --
 ALTER TABLE `publication`
-  MODIFY `publication_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `publication_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `publication_comment`
@@ -150,7 +162,7 @@ ALTER TABLE `publication_comment`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
