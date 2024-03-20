@@ -48,4 +48,23 @@ class User extends \app\core\Controller
             $this->view('User/login', true);
         }
     }
+
+    public function logout()
+    {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Check if the user is logged in
+        if (isset($_SESSION['user_id'])) {
+            // Unset the user session variable
+            unset($_SESSION['user_id']);
+        }
+        // Destroy all session data
+        session_destroy();
+        // Redirect to the login page
+        header('location:/User/login');
+    } else {
+        // If the request method is not POST, redirect to the login page
+        header('location:/User/login');
+    }
+}
+
 }

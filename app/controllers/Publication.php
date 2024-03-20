@@ -5,9 +5,9 @@ class Publication extends \app\core\Controller //by youssef
 {
     public function index()
     {
-        $allPublications = new \app\models\Publication();
-        $allPublications = $allPublications->getAll();
-        $this->view('Publication/index', $allPublications);
+        $publicationModel = new \app\models\Publication();
+        $allPublications = $publicationModel->getAll();
+        $this->view('Publication/index', ['allPublications' => $allPublications]);
     }
     public function create()
     {

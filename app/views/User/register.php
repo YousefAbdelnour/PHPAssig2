@@ -1,33 +1,38 @@
-<html>
+<!--By: Rowan --> 
 
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>
-        <?= $name ?> view
-    </title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link href="/app/views/login.css" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"> 
+    <!-- bootstrap, makes the page better and responsive. Important to have in all views -->
+
 </head>
-
 <body>
-    <div class='container'>
-        <form method='post' action=''>
-            <div class="form-group">
-                <label>Username:<input type="text" class="form-control" name="username" placeholder="Jon" /></label>
-            </div>
-            <div class="form-group">
-                <label>Password:<input type="password" class="form-control" name="password"
-                        placeholder="password" /></label>
-            </div>
-
-            <div class="form-group">
-                <input type="submit" name="action" value="Register" />
-                <a href='/User/login'>I have an account, bring me to the login page</a>
-            </div>
-        </form>
+    
+    <!-- Nav bar --> 
+    <div class="navbar">
+        <a href="/Publication/index">Home</a>
+        <a href="/Profile/edit">Profile</a>
+        <?php if (!isset($_SESSION['user_id'])): ?>
+            <a href="/User/login">Login</a>
+        <?php endif; ?>
     </div>
-</body>
 
+    <h1>Log In</h1> 
+
+    <!-- Registration page -->
+    <form action="/User/register" method="post">
+        <label for="username">Username:</label><br>
+        <input type="text" id="username" name="username"><br>
+        <label for="password">Pasword:</label><br>
+        <input type="password" id="password" name="password">
+        <input type="submit">
+    </form>
+
+
+</body>
 </html>

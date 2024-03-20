@@ -19,17 +19,19 @@
     <!-- Nav bar -->
     <div class="navbar">
         <a href="/Publication/index">Home</a>
-        <a href="/Publication/create">Messages</a>
-        <a href="/Profile/modify">Profile</a>
+        <a href="/Profile/edit">Profile</a>
+        <?php if (!isset($_SESSION['user_id'])): ?>
+            <a href="/User/login">Login</a>
+        <?php endif; ?>
     </div>
 
     <h1>Log In</h1>
 
     <!-- Login page -->
-    <form method='post' action=''>
-        <label for="username">First name:</label><br>
+    <form action='/User/login' method='post' >
+        <label for="username">Username:</label><br>
         <input type="text" id="username" name="username"><br>
-        <label for="password">Last name:</label><br>
+        <label for="password">Password:</label><br>
         <input type="password" id="password" name="password">
         <input type="submit">
         <a href='/User/register'>I have no account, bring me to the registration page</a>
