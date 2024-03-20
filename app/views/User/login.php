@@ -18,9 +18,9 @@
 
     <!-- Nav bar -->
     <div class="navbar">
-        <a href="#">Home</a>
-        <a href="#">Messages</a>
-        <a href="Profile/modify">Profile</a>
+        <a href="/Publication/index">Home</a>
+        <a href="/Publication/create">Messages</a>
+        <a href="/Profile/modify">Profile</a>
     </div>
 
     <h1>Log In</h1>
