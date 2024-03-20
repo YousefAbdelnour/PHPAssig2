@@ -8,7 +8,7 @@ class Publication extends \app\core\Controller //by youssef
     {
         $publicationModel = new \app\models\Publication();
         $allPublications = $publicationModel->getAll();
-        $this->view('Publication/index', ['allPublications' => $allPublications]);
+        $this->view('Publication/index', ['data' => $allPublications]);
     }
     #[\app\filters\HasProfile]
     #[\app\filters\Login]
@@ -30,6 +30,7 @@ class Publication extends \app\core\Controller //by youssef
 
     #[\app\filters\HasProfile]
     #[\app\filters\Login]
+    #[\app\filters\OwnsPublication]
     public function edit()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -46,6 +47,7 @@ class Publication extends \app\core\Controller //by youssef
     }
     #[\app\filters\HasProfile]
     #[\app\filters\Login]
+    #[\app\filters\OwnsPublication]
     public function delete()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {

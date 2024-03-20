@@ -22,6 +22,7 @@ class OwnsPublication implements \app\core\AccessFilter
         }
 
         if ($selectedPublication === null || $selectedPublication->profile_id != $profile->profile_id) {
+            header('location:/Error/publicationNotOwned');
             return true;
         }
 

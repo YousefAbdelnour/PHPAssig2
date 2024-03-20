@@ -34,7 +34,7 @@ class Publication extends \app\core\Model
         = :publication_status AND publication_id = :publication_id';
         $STMT = self::$_conn->prepare($SQL);
         $STMT->execute([
-            'publication_status' => true,
+            'publication_status' => 1,
             'publication_id' => $this->id
         ]);
         $STMT->setFetchMode(PDO::FETCH_CLASS, 'app\models\Publication');
@@ -44,7 +44,7 @@ class Publication extends \app\core\Model
     {
         $SQL = 'SELECT * FROM publication WHERE publication_status = :publication_status';
         $STMT = self::$_conn->prepare($SQL);
-        $STMT->execute(['publication_status' => true]);
+        $STMT->execute(['publication_status' => 1]);
         $STMT->setFetchMode(PDO::FETCH_CLASS, 'app\models\Publication');
         return $STMT->fetchAll();
     }
@@ -55,7 +55,7 @@ class Publication extends \app\core\Model
         $STMT->execute(
             [
                 'publication_title' => $pTitle,
-                'publication_status' => true
+                'publication_status' => 1
             ]
         );
         $STMT->setFetchMode(PDO::FETCH_CLASS, 'app\models\Publication');
@@ -68,7 +68,7 @@ class Publication extends \app\core\Model
         $STMT->execute(
             [
                 'publication_text' => $pContent,
-                'publication_status' => true
+                'publication_status' => 1
             ]
         );
         $STMT->setFetchMode(PDO::FETCH_CLASS, 'app\models\Publication');

@@ -4,36 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Publication</title>
-    <link href="/app/views/login.css" rel="stylesheet"> 
+    <link rel="stylesheet" href="/path/to/your/css/styles.css">
 </head>
 <body>
-    
-    <!-- Nav bar --> 
-    <div class="navbar">
-        <a href="/Publication/index">Home</a>
-        <a href="/Profile/edit">Profile</a>
-        <?php if (isset($_SESSION['user_id'])) : ?>
-            <a href="/User/logout">Logout</a>
-        <?php else : ?>
-            <a href="/User/login">Login</a>
-        <?php endif; ?>
-    </div>
+    <?php include('path/to/navbar.php'); ?>
 
-<!-- Publication Form -->
-<div class="container">
-    <h2>Create New Publication</h2>
-    <form action="/Publication/create" method="post">
-        <div class="form-group">
-            <label for="title">Title:</label>
-            <input type="text" id="title" name="title" required>
-        </div>
-        <div class="form-group">
-            <label for="text">Text:</label>
-            <textarea id="text" name="text" required></textarea>
-        </div>
-        <button type="submit">Create</button>
+    <h1>Create Publication</h1>
+    <form action="/Publication/create" method="POST">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required>
+        <label for="text">Text:</label>
+        <textarea id="text" name="text" required></textarea>
+        <label for="status">Status:</label>
+        <select id="status" name="status">
+            <option value="0">Private</option>
+            <option value="1">Public</option>
+        </select>
+        <button type="submit">Submit</button>
     </form>
-</div>
-
 </body>
 </html>

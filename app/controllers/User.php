@@ -39,7 +39,9 @@ class User extends \app\core\Controller
             if ($user && password_verify($password, $user->password_hash)) {
                 //remember that this is the user logging in...
                 $_SESSION['user_id'] = $user->user_id;
-
+                $profile = new \app\models\Profile();
+                $profile = $profile->fetchProfile($user->user_id);
+                $_SESSION['profile_id'] = $profile->profile_id;
                 header('location:/Profile/index');
             } else {
                 header('location:/User/login', false);

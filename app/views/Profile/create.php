@@ -11,16 +11,8 @@
 
 <body>
 
-    <!-- Nav bar -->
-    <div class="navbar">
-        <a href="/Publication/index">Home</a>
-        <a href="/Profile/edit">Profile</a>
-        <?php if (isset($_SESSION['user_id'])) : ?>
-            <a href="/User/logout">Logout</a>
-        <?php else : ?>
-            <a href="/User/login">Login</a>
-        <?php endif; ?>
-    </div>
+<?php include('app/views/navbar.php'); ?>
+
 
 
     <h1>Profile Creation Page</h1>

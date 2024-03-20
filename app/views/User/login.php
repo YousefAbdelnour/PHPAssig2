@@ -17,13 +17,7 @@
 <body>
 
     <!-- Nav bar -->
-    <div class="navbar">
-        <a href="/Publication/index">Home</a>
-        <a href="/Profile/edit">Profile</a>
-        <?php if (!isset($_SESSION['user_id'])): ?>
-            <a href="/User/login">Login</a>
-        <?php endif; ?>
-    </div>
+    
 
     <h1>Log In</h1>
 

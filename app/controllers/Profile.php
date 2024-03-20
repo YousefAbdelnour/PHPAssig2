@@ -25,6 +25,7 @@ class Profile extends \app\core\Controller
             $profile->last_name = $_POST['lastName'];
             $profile->insert();
             $profile->fetchProfile($_SESSION['user_id']);
+            $_SESSION['profile_id'] = $profile->profile_id;
             header('location:/Profile/index');
         } else {
             $this->view('Profile/create');

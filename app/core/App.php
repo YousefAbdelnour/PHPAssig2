@@ -58,6 +58,7 @@ class App
         [$controllerMethod, $namedParams] = $this->resolve($url);
 
         if (!$controllerMethod) {
+            header('Location:/Publication/index');
             return;
         }
 
