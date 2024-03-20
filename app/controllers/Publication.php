@@ -21,7 +21,7 @@ class Publication extends \app\core\Controller //by youssef
             $publication->create();
             header('location:/Publication/index');
         } else {
-            $this->view('Profile/create');
+            $this->view('Publication/create');
         }
     }
     public function edit()
