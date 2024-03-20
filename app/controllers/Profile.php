@@ -13,20 +13,20 @@ class Profile extends \app\core\Controller
         $this->view('Profile/index', $profile);
     }
     public function create()
-{
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $profile = new \app\models\Profile();
-        $profile->user_id = $_SESSION['user_id'];
-        $profile->first_name = $_POST['firstName'];
-        $profile->middle_name = $_POST['middleName'];
-        $profile->last_name = $_POST['lastName'];
-        $profile->insert();
-        $_SESSION['profile_id'] = $profile->id;
-        header('location:/Profile/index');
-    } else {
-        $this->view('Profile/create');
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $profile = new \app\models\Profile();
+            $profile->user_id = $_SESSION['user_id'];
+            $profile->first_name = $_POST['firstName'];
+            $profile->middle_name = $_POST['middleName'];
+            $profile->last_name = $_POST['lastName'];
+            $profile->insert();
+            $_SESSION['profile_id'] = $profile->id;
+            header('location:/Profile/index');
+        } else {
+            $this->view('Profile/create');
+        }
     }
-}
 
     #[\app\filters\HasProfile]
     public function modify()
