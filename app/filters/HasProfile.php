@@ -8,13 +8,10 @@ class HasProfile implements \app\core\AccessFilter
 
 	public function redirected()
 	{
-		$profile = new \app\models\Profile();
-		$profile = $profile->fetchProfile($_SESSION['user_id']);
-		if ($profile) {
-			return false;
-		} else {
+		if (!isset($_SESSION['profile_id'])) {
 			header('location:/Profile/create');
 			return true;
 		}
+		return false;
 	}
 }

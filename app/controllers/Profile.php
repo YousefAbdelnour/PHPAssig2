@@ -10,6 +10,9 @@ class Profile extends \app\core\Controller
     {
         $profile = new \app\models\Profile();
         $profile = $profile->fetchProfile($_SESSION['user_id']);
+        $_SESSION['profile_id'] = $profile->profile_id;
+        var_dump($_SESSION);
+        var_dump($profile);
         $this->view('Profile/index', $profile);
     }
     public function create()
@@ -21,7 +24,7 @@ class Profile extends \app\core\Controller
             $profile->middle_name = $_POST['middleName'];
             $profile->last_name = $_POST['lastName'];
             $profile->insert();
-            $_SESSION['profile_id'] = $profile->id;
+            $profile->fetchProfile($_SESSION['user_id']);
             header('location:/Profile/index');
         } else {
             $this->view('Profile/create');

@@ -6,7 +6,7 @@ use PDO;
 
 class Profile extends \app\core\Model
 {
-    public $id;
+    public $profile_id;
     public $user_id;
     public $first_name;
     public $middle_name;
@@ -42,7 +42,7 @@ class Profile extends \app\core\Model
         $STMT = self::$_conn->prepare($SQL);
         $STMT->execute(
             [
-                'profile_id' => $this->id,
+                'profile_id' => $this->profile_id,
                 'first_name' => $this->first_name,
                 'middle_name' => $this->middle_name,
                 'last_name' => $this->last_name

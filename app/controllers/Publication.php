@@ -1,6 +1,7 @@
 <?php
 
 namespace app\controllers;
+
 class Publication extends \app\core\Controller //by youssef
 {
     public function index()
@@ -9,6 +10,8 @@ class Publication extends \app\core\Controller //by youssef
         $allPublications = $publicationModel->getAll();
         $this->view('Publication/index', ['allPublications' => $allPublications]);
     }
+    #[\app\filters\HasProfile]
+    #[\app\filters\Login]
     public function create()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -24,6 +27,9 @@ class Publication extends \app\core\Controller //by youssef
             $this->view('Publication/create');
         }
     }
+
+    #[\app\filters\HasProfile]
+    #[\app\filters\Login]
     public function edit()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -38,6 +44,8 @@ class Publication extends \app\core\Controller //by youssef
             $this->view('Profile/edit');
         }
     }
+    #[\app\filters\HasProfile]
+    #[\app\filters\Login]
     public function delete()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
