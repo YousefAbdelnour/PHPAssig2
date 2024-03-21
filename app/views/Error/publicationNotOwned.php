@@ -5,7 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>    <?php include('app/views/navbar.php'); ?>
+<body>    
+    
+    <?php 
+    include('app/views/navbar.php'); 
+
+    ?>
 
     publication not owned
 </body>

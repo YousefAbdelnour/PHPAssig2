@@ -7,7 +7,6 @@
     <title>Publications</title>
     <link href="/app/views/login.css" rel="stylesheet">
     <style>
-        /* Define CSS for publication divs */
         .publication {
             border: 1px solid #ccc;
             padding: 10px;
@@ -21,15 +20,8 @@
 
 
     <!-- Nav bar -->
-    <div class="navbar">
-        <a href="/Publication/index">Home</a>
-        <a href="/Profile/edit">Profile</a>
-        <?php if (isset($_SESSION['user_id'])) : ?>
-            <a href="/User/logout">Logout</a>
-        <?php else : ?>
-            <a href="/User/login">Login</a>
-        <?php endif; ?>
-    </div>
+    <?php include('app/views/navbar.php'); ?>
+
 
 
     <h1>Publication Home</h1>

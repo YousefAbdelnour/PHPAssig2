@@ -54,3 +54,10 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background-color: #315be4;
 }
+
+.comment{
+
+    border-style: solid;
+    border-color: black;
+
+}

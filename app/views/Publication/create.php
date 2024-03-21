@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Publication</title>
-    <link rel="stylesheet" href="/path/to/your/css/styles.css">
+    <link href="/app/views/login.css" rel="stylesheet">
 </head>
 <body>
     <?php include('path/to/navbar.php'); ?>

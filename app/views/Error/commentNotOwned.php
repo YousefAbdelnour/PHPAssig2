@@ -6,7 +6,12 @@
     <title>Document</title>
 </head>
 <body>
-<?php include('app/views/navbar.php'); ?>
+    
+    <?php 
+    
+    include('app/views/navbar.php'); 
+    
+    ?>
 
     comment not owned
 </body>
