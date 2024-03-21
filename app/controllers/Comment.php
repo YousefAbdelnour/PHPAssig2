@@ -45,7 +45,7 @@ class Comment extends \app\core\Controller
     {
         if ($_SERVER['REQUEST METHOD'] === 'GET') {
             $comment = new \app\models\Comment;
-            $comment->comment_id = $_GET['comment_id'];
+            $comment->comment_id = $_GET['id'];
             $comment->delete();
             header('location:/Publication/index');
         } else {

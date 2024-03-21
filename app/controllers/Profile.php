@@ -9,11 +9,14 @@ class Profile extends \app\core\Controller
     public function index()
     {
         $profile = new \app\models\Profile();
+        $publications = new \app\models\Publication();
+        $comment = new \app\models\Comment();
         $profile = $profile->fetchProfile($_SESSION['user_id']);
         $_SESSION['profile_id'] = $profile->profile_id;
-        var_dump($_SESSION);
-        var_dump($profile);
-        $this->view('Profile/index', $profile);
+        $finalData['profile'] = $profile;
+        $finalData['publications'] = $publications->getForOwner($profile->profile_id); //get all pubications related to the profile
+        $finalData['comment'] = $comment->read(); //get all comments
+        $this->view('Profile/index', $finalData);
     }
     public function create()
     {

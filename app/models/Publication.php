@@ -74,11 +74,11 @@ class Publication extends \app\core\Model
         $STMT->setFetchMode(PDO::FETCH_OBJ);
         return $STMT->fetchAll();
     }
-    public function getForOwner()
+    public function getForOwner($profile_id)
     {
         $SQL = 'SELECT * FROM publication WHERE profile_id = :profile_id';
         $STMT = self::$_conn->prepare($SQL);
-        $STMT->execute(['profile_id' => $this->profile_id]);
+        $STMT->execute(['profile_id' => $profile_id]);
         $STMT->setFetchMode(PDO::FETCH_OBJ);
         return $STMT->fetchAll();
     }
