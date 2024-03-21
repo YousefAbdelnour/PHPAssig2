@@ -6,8 +6,10 @@ class Publication extends \app\core\Controller //by youssef
 {
     public function index()
     {
+    $commentModel = new \app\models\Comment(); 
     $publicationModel = new \app\models\Publication();
-    $allPublications = $publicationModel->getAll();
+    $allPublications ['publications'] = $publicationModel->getAll();
+    $allPublications ['comments'] = $commentModel->read(); 
     $this->view('Publication/index', $allPublications);
     }
 
