@@ -6,14 +6,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Profile</title>
     <link href="/app/views/login.css" rel="stylesheet">
+    <style>
+        .comment {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+}
 
+/* Styling for buttons */
+.button {
+    display: inline-block;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    background-color: gray;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+.publication {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.comment {
+        margin-top: 10px;
+        padding: 10px;
+        background-color: #f9f9f9;
+        border: 1px solid #ccc;
+    }
+
+    /* Styling for buttons */
+    .button, .a {
+        display: inline-block;
+        padding: 8px 16px;
+        text-align: center;
+        text-decoration: none;
+        background-color: gray;
+        color: #ffffff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-right: 10px;
+    }
+
+    .button:hover {
+        background-color: #0056b3;
+    }
+
+    </style>
 </head>
-<body>    <?php include('app/views/navbar.php'); ?>
+<body>    
+    <?php include('app/views/navbar.php'); ?>
 
     <h1>Profile Information</h1>
     <p><strong>First Name:</strong> <?php echo ($data['profile']->first_name); ?></p>
     <p><strong>Middle Name:</strong> <?php echo ($data['profile']->middle_name); ?></p>
     <p><strong>Last Name:</strong> <?php echo ($data['profile']->last_name); ?></p>
+
+    <a href="/Profile/modify">Edit Profile</a>
 
     <div class="publications">
         <?php foreach ($data['publications'] as $publication) : ?>
@@ -36,6 +95,6 @@
         <?php endforeach; ?>
     </div>
 
-    <a href="/Profile/modify">Edit Profile</a>
+    
 </body>
 </html>
