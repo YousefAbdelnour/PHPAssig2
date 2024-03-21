@@ -14,3 +14,6 @@ $this->addRoute('Comment/create','Comment,create');
 $this->addRoute('Comment/modify','Comment,modify');
 $this->addRoute('Error/publicationNotOwned','Error,publicationNotOwned');
 $this->addRoute('Error/commentNotOwned','Error,commentNotOwned');
+$this->addRoute('Publication/delete/:publication_id', 'Publication,delete');
+$this->addRoute('Comment/create/:publication_id', 'Comment,create');
+$this->addRoute('Comment/delete/:publication_comment_id', 'Comment,delete');

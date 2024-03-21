@@ -7,13 +7,14 @@ class OwnsPublication implements \app\core\AccessFilter
 {
     public function redirected()
     {
-        $publicationId = $_REQUEST['publication_id'] ?? null;
-        $profile = (new \app\models\Profile())->fetchProfile($_SESSION['user_id']);
+        $publicationId = $_GET['id'];
+        $profile = (new \app\models\Profile());
+        $profile = $profile->fetchProfile($_SESSION['user_id']);
         $publicationModel = new \app\models\Publication();
-        $publicationModel->profile_id = $publicationId;
+        $publicationModel->profile_id = $profile->profile_id;
         $publications = $publicationModel->getById();
 
-        $selectedPublication = null;
+        $selectedPublication = new \app\models\Publication();
         foreach ($publications as $pub) {
             if ($pub->id == $publicationId) {
                 $selectedPublication = $pub;
@@ -21,7 +22,7 @@ class OwnsPublication implements \app\core\AccessFilter
             }
         }
 
-        if ($selectedPublication === null || $selectedPublication->profile_id != $profile->profile_id) {
+        if ($selectedPublication->profile_id != $profile->profile_id) {
             header('location:/Error/publicationNotOwned');
             return true;
         }

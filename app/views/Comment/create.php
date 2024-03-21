@@ -10,8 +10,7 @@
     <?php include('app/views/navbar.php'); ?>
 
     <h1>Create Comment</h1>
-    <form action="/Comment/create" method="POST">
-        <input type="hidden" name="publication_id" value="<?php echo $data->publication_id; ?>">
+    <form action="" method="POST">
         <label for="comment_text">Comment:</label>
         <textarea id="comment_text" name="comment_text" required></textarea>
         <button type="submit">Submit</button>

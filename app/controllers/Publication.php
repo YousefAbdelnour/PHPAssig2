@@ -6,11 +6,11 @@ class Publication extends \app\core\Controller //by youssef
 {
     public function index()
     {
-    $commentModel = new \app\models\Comment(); 
-    $publicationModel = new \app\models\Publication();
-    $allPublications ['publications'] = $publicationModel->getAll();
-    $allPublications ['comments'] = $commentModel->read(); 
-    $this->view('Publication/index', $allPublications);
+        $commentModel = new \app\models\Comment();
+        $publicationModel = new \app\models\Publication();
+        $allPublications['publications'] = $publicationModel->getAll();
+        $allPublications['comments'] = $commentModel->read();
+        $this->view('Publication/index', $allPublications);
     }
 
     #[\app\filters\HasProfile]
@@ -26,11 +26,11 @@ class Publication extends \app\core\Controller //by youssef
             $publication->publication_status = $_POST['status'];
             $publication->create();
             header('location:/Publication/index');
-            echo($publication->profile_id);
-            echo($publication->publication_title);
-            echo($publication->publication_text);
-            echo($publication->timestamp);
-            echo($publication->publication_status);
+            echo ($publication->profile_id);
+            echo ($publication->publication_title);
+            echo ($publication->publication_text);
+            echo ($publication->timestamp);
+            echo ($publication->publication_status);
         } else {
             $this->view('Publication/create');
         }
@@ -38,7 +38,7 @@ class Publication extends \app\core\Controller //by youssef
 
     #[\app\filters\HasProfile]
     #[\app\filters\Login]
-    #[\app\filters\OwnsPublication]
+    // #[\app\filters\OwnsPublication]
     public function edit()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -50,21 +50,21 @@ class Publication extends \app\core\Controller //by youssef
             $publication->edit();
             header('location:/Publication/index');
         } else {
-            $this->view('Profile/edit');
+            $this->view('Publication/edit');
         }
     }
     #[\app\filters\HasProfile]
     #[\app\filters\Login]
-    #[\app\filters\OwnsPublication]
-    public function delete()
+    // #[\app\filters\OwnsPublication]
+    public function delete() // $publication_id is fetched from the URL
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $publication = new \app\models\Publication();
-            $publication->publication_id = $_POST['publication_id'];
+            $publication->publication_id = $_GET['id']; // Use the $publication_id from the URL
             $publication->delete();
             header('location:/Publication/index');
         } else {
-            $this->view('Profile/delete');
+            $this->view('Publication/delete');
         }
     }
 }

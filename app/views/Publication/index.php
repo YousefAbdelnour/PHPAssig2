@@ -43,8 +43,8 @@
             <div class="publication">
                 <h2><?php echo $publication->publication_title; ?></h2>
                 <p><?php echo $publication->publication_text; ?></p>
-                <a href="/Publication/delete/<?php echo $publication->publication_id; ?>" class="button">Delete</a>
-                <a href="/Comment/create/<?php echo $publication->publication_id; ?>" class="button">Comment</a>
+                <?php echo "<a href='/Publication/delete?id=$publication->publication_id' class='button'>Delete</a>
+                <a href='/Comment/create?id=$publication->publication_id' class='button'>Comment</a>";?>
 
                 <!-- Display comments for this publication -->
                 <?php foreach ($data['comments'] as $comment) : ?>
@@ -52,7 +52,7 @@
                         <div class="comment">
                             <p><?php echo $comment->comment_text; ?></p>
                             <!-- Optional: Add a delete link for the comment if needed -->
-                            <a href="/Comment/delete/<?php echo $comment->comment_id; ?>" class="button">Delete Comment</a>
+                            <?php echo "<a href='/Comment/delete?id=$comment->publication_comment_id' class='button'>Delete</a>";?>
                         </div>
                     <?php endif; ?>
                 <?php endforeach; ?>

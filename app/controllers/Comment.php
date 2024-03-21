@@ -6,13 +6,15 @@ namespace app\controllers;
 #[\app\filters\Login]
 class Comment extends \app\core\Controller
 {
-    public function create()
+    #[\app\filters\HasProfile]
+    #[\app\filters\Login]
+    public function create() // $publication_id is fetched from the URL
     {
-        if ($_SERVER['REQUEST METHOD'] === 'POST' && isset($_POST['comment_text'])) {
-            $comment = new \app\models\Comment;
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['comment_text'])) {
+            $comment = new \app\models\Comment();
             $comment->comment_text = $_POST['comment_text'];
             $comment->profile_id = $_SESSION['profile_id'];
-            $comment->publication_id = $_POST['publication_id'];
+            $comment->publication_id = $_GET['id']; // Use the $publication_id from the URL
             $comment->timestamp = date('Y-m-d H:i:s');
             $comment->create();
             header('location:/Publication/index');
@@ -21,7 +23,8 @@ class Comment extends \app\core\Controller
         }
     }
 
-    #[\app\filters\OwnsComment]
+
+    // #[\app\filters\OwnsComment]
     public function edit()
     {
         if ($_SERVER['REQUEST METHOD'] === 'POST' && isset($_POST['edit_text'])) {
@@ -37,12 +40,12 @@ class Comment extends \app\core\Controller
         }
     }
 
-    #[\app\filters\OwnsComment]
+    // #[\app\filters\OwnsComment]
     public function delete()
     {
-        if ($_SERVER['REQUEST METHOD'] === 'POST') {
+        if ($_SERVER['REQUEST METHOD'] === 'GET') {
             $comment = new \app\models\Comment;
-            $comment->comment_id = $_POST['comment_id'];
+            $comment->comment_id = $_GET['comment_id'];
             $comment->delete();
             header('location:/Publication/index');
         } else {
