@@ -2,8 +2,6 @@
 
 namespace app\controllers;
 
-#[\app\filters\HasProfile]
-#[\app\filters\Login]
 class Comment extends \app\core\Controller
 {
     #[\app\filters\HasProfile]
@@ -47,7 +45,7 @@ class Comment extends \app\core\Controller
             $comment = new \app\models\Comment;
             $comment->comment_id = $_GET['id'];
             $comment->delete();
-            header('location:/Publication/index');
+            header('location:/Comment/delete');
         } else {
             $this->view('Comment/delete');
         }

@@ -13,6 +13,15 @@ class Publication extends \app\core\Controller //by youssef
         $this->view('Publication/index', $allPublications);
     }
 
+    public function publication(){
+        $commentModel = new \app\models\Comment();
+        $publicationModel = new \app\models\Publication();
+        $publicationModel->publication_id = $_GET['id'];
+        $allPublications['publications'] = $publicationModel->getById();
+        $allPublications['comments'] = $commentModel->read();
+        $this->view('Publication/publication', $allPublications);
+    }
+
     #[\app\filters\HasProfile]
     #[\app\filters\Login]
     public function create()
@@ -63,8 +72,6 @@ class Publication extends \app\core\Controller //by youssef
             $publication->publication_id = $_GET['id']; // Use the $publication_id from the URL
             $publication->delete();
             header('location:/Publication/index');
-        } else {
-            $this->view('Publication/delete');
         }
     }
 }
