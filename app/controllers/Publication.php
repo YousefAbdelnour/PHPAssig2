@@ -6,9 +6,10 @@ class Publication extends \app\core\Controller //by youssef
 {
     public function index()
     {
-        $publicationModel = new \app\models\Publication();
-        $allPublications = $publicationModel->getAll();
-        $this->view('Publication/index', ['data' => $allPublications]);
+    $publicationModel = new \app\models\Publication();
+    $allPublications = $publicationModel->getAll();
+    echo var_dump($allPublications); 
+    $this->view('Publication/index', ['allPublications' => $allPublications]);
     }
     #[\app\filters\HasProfile]
     #[\app\filters\Login]

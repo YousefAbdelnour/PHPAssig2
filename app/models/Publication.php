@@ -16,7 +16,7 @@ class Publication extends \app\core\Model
     public function create()
     {
         $SQL = 'INSERT INTO publication(profile_id,publication_title,publication_text,timestamp,publication_status)
-        VALUE (:profile_id,:publication_title,:publication_text,:timestamp,:publication_status)';
+        VALUES (:profile_id,:publication_title,:publication_text,:timestamp,:publication_status)';
         $STMT = self::$_conn->prepare($SQL);
         $STMT->execute(
             [
