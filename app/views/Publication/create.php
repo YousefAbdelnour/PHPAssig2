@@ -7,7 +7,10 @@
     <link href="/app/views/login.css" rel="stylesheet">
 </head>
 <body>
-    <?php include('path/to/navbar.php'); ?>
+    
+
+    <?php include('app/views/navbar.php'); ?>
+    
 
     <h1>Create Publication</h1>
     <form action="/Publication/create" method="POST">

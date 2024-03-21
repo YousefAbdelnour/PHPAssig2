@@ -65,7 +65,7 @@ class Comment extends \app\core\Model
     public function delete(){
         $SQL = 'DELETE FROM publication_comment WHERE publication_comment_id = :commment_id';
         $STMT = self::$_conn->prepare($SQL);
-        $STMT->execute(['commment_id' => $this->comment_id]);
+        $STMT->execute(['comment_id' => $this->comment_id]);
     }
 
 }
