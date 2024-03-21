@@ -30,7 +30,7 @@ class Comment extends \app\core\Model
         $SQL = 'SELECT * FROM publication_comment';
         $STMT = self::$_conn->prepare($SQL);
         $STMT->execute();
-        $STMT->setFetchMode(PDO::FETCH_CLASS, 'app\models\Comment');
+        $STMT->setFetchMode(PDO::FETCH_OBJ);
         return $STMT->fetchAll();
     }
 
@@ -38,7 +38,7 @@ class Comment extends \app\core\Model
         $SQL = 'SELECT * FROM publication_comment WHERE profile_id = :profile_id';
         $STMT = self::$_conn->prepare($SQL);
         $STMT->execute(['profile_id' => $profile_id]);
-        $STMT->setFetchMode(PDO::FETCH_CLASS, 'app\models\Comment');
+        $STMT->setFetchMode(PDO::FETCH_OBJ);
         return $STMT->fetchAll();
     }
 
@@ -46,7 +46,7 @@ class Comment extends \app\core\Model
         $SQL = 'SELECT * FROM publication_comment WHERE publication_comment_id = :comment_id';
         $STMT = self::$_conn->prepare($SQL);
         $STMT->execute(['comment_id' => $comment_id]);
-        $STMT->setFetchMode(PDO::FETCH_CLASS, 'app\models\Comment');
+        $STMT->setFetchMode(PDO::FETCH_OBJ);
         return $STMT->fetch();
     }
 
