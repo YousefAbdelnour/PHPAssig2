@@ -14,8 +14,8 @@
 <h1>Search Results</h1>
 
 <div class="publications">
-    <?php if (!empty($data['publications'])): ?>
-        <?php foreach ($data['publications'] as $publication): ?>
+    <?php if (!empty($data['search_results'])): ?>
+        <?php foreach ($data['search_results'] as $publication): ?>
             <div class="publication">
                 <h2><?php echo "<a href='/Publication/publication?id=$publication->publication_id'>$publication->publication_title</a>"; ?></h2>
                 <p><?php echo $publication->publication_text; ?></p>
@@ -25,6 +25,7 @@
         <p>No publications found matching your search criteria.</p>
     <?php endif; ?>
 </div>
+
 
 </body>
 </html>

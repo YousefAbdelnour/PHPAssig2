@@ -11,9 +11,9 @@
 
     <h1>Delete Comment</h1>
     <p>Are you sure you want to delete this comment?</p>
-    <form action="/Comment/delete" method="POST">
-        <input type="hidden" name="comment_id" value="<?php echo $comment->comment_id; ?>">
-        <button type="submit">Delete</button>
+    <form method="post" action="/Comment/delete">
+        <input type="hidden" name="id" value="<?php echo $comment->publication_comment_id; ?>">
+        <button type="submit" class="button">Delete Comment</button>
     </form>
 </body>
 </html>

@@ -94,10 +94,14 @@
                 <?php foreach ($data['comments'] as $comment) : ?>
                     <?php if ($comment->publication_id == $publication->publication_id) : ?>
                         <div class="comment">
-                            <p><?php echo $comment->comment_text; ?></p>
-                            <!-- Optional: Add a delete link for the comment if needed -->
-                            <?php echo "<a href='/Comment/delete?id=$comment->publication_comment_id' class='button'>Delete</a>"; ?>
-                        </div>
+    <p><?php echo $comment->comment_text; ?></p>
+    <!-- Use a form for deleting the comment -->
+    <form method="post" action="/Comment/delete">
+        <input type="hidden" name="id" value="<?php echo $comment->publication_comment_id; ?>">
+        <button type="submit" class="button">Delete</button>
+    </form>
+</div>
+
                     <?php endif; ?>
                 <?php endforeach; ?>
             </div>

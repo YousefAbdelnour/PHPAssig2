@@ -62,10 +62,15 @@ class Comment extends \app\core\Model
         );
     }
 
-    public function delete(){
-        $SQL = 'DELETE FROM publication_comment WHERE publication_comment_id = :commment_id';
-        $STMT = self::$_conn->prepare($SQL);
-        $STMT->execute(['comment_id' => $this->comment_id]);
+    public function delete() {
+        try {
+            $SQL = 'DELETE FROM publication_comment WHERE publication_comment_id = :publication_comment_id';
+            $STMT = self::$_conn->prepare($SQL);
+            $STMT->execute(['publication_comment_id' => $this->publication_comment_id]);
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            exit();
+        }
     }
 
 }
