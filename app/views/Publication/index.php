@@ -43,9 +43,21 @@
         <div class="publication">
             <h2><?php echo $publication->publication_title; ?></h2>
             <p><?php echo $publication->publication_text; ?></p>
+            <a href="/Publication/delete" class="button">Delete</a>
+            <a href="/Comment/create" class="button">Comment</a>
+
+            <!-- Subdivision for comments -->
+            <div class="comments">
+                <?php foreach ($publication->comments as $comment) : ?>
+                    <div class="comment">
+                        <p><?php echo $comment->comment_text; ?></p>
+                    </div>
+                <?php endforeach; ?>
+            </div>
         </div>
     <?php endforeach; ?>
-    </div>
+</div>
+
 
     <a href="/Publication/create" class="button">Create -></a>
 

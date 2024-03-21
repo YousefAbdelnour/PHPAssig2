@@ -12,7 +12,7 @@
     <h1>Delete Publication</h1>
     <p>Are you sure you want to delete this publication?</p>
     <form action="/Publication/delete" method="POST">
-        <input type="hidden" name="publication_id" value="<?php echo $data->id; ?>">
+        <input type="hidden" name="publication_id" value="<?php echo $data->publication_id; ?>">
         <button type="submit">Delete</button>
     </form>
 </body>
