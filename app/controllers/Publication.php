@@ -13,7 +13,8 @@ class Publication extends \app\core\Controller //by youssef
         $this->view('Publication/index', $allPublications);
     }
 
-    public function publication(){
+    public function publication()
+    {
         $commentModel = new \app\models\Comment();
         $publicationModel = new \app\models\Publication();
         $publicationModel->publication_id = $_GET['id'];
@@ -73,5 +74,19 @@ class Publication extends \app\core\Controller //by youssef
             $publication->delete();
             header('location:/Publication/index');
         }
+    }
+
+
+    public function search()
+    {
+        $searchQuery = $_GET['query'] ?? ''; // Get the search query from the URL, default to empty string if not set
+        $publicationModel = new \app\models\Publication();
+
+        // Use the existing or a modified search method in your model
+        $searchResults['publications'] = $publicationModel->searchPublications($searchQuery);
+        // Assuming you don't need comments for the search results view
+        $searchResults['comments'] = [];
+
+        $this->view('Publication/search', $searchResults); // Point to a new view for search results
     }
 }

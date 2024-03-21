@@ -83,7 +83,8 @@ class Publication extends \app\core\Model
         return $STMT->fetchAll();
     }
 
-    public function getByPublication(){
+    public function getByPublication()
+    {
         $SQL = 'SELECT * FROM publication_comment WHERE publication_id = :publication_id';
         $STMT = self::$_conn->prepare($SQL);
         $STMT->execute(['publication_id' => $this->publication_id]);
@@ -116,5 +117,16 @@ class Publication extends \app\core\Model
         $STMT->execute(
             ['publication_id' => $this->publication_id]
         );
+    }
+
+    public function searchPublications($query)
+    {
+        $SQL = 'SELECT * FROM publication 
+            WHERE (publication_title LIKE :query OR publication_text LIKE :query) 
+            AND publication_status = 1';
+        $STMT = self::$_conn->prepare($SQL);
+        $STMT->execute(['query' => '%' . $query . '%']);
+        $STMT->setFetchMode(PDO::FETCH_OBJ);
+        return $STMT->fetchAll();
     }
 }

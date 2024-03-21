@@ -70,6 +70,10 @@
     <!-- Nav bar -->
     <?php include('app/views/navbar.php'); ?>
 
+    <form action="/Publication/search" method="get">
+    <input type="text" name="query" placeholder="Search publications...">
+    <button type="submit" class="button">Search</button>
+</form>
 
 
     <h1>Publication Home</h1>
