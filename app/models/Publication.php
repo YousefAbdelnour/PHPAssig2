@@ -6,12 +6,12 @@ use PDO;
 
 class Publication extends \app\core\Model
 {
-    public $id;
+    public $publication_id;
     public $profile_id;
-    public $title;
-    public $text;
+    public $publication_title;
+    public $publication_text;
     public $timestamp;
-    public $status;
+    public $publication_status;
 
     public function create()
     {
@@ -21,10 +21,10 @@ class Publication extends \app\core\Model
         $STMT->execute(
             [
                 'profile_id' => $this->profile_id,
-                'publication_title' => $this->title,
-                'publication_text' => $this->text,
+                'publication_title' => $this->publication_title,
+                'publication_text' => $this->publication_text,
                 'timestamp' => $this->timestamp,
-                'publication_status' => $this->status
+                'publication_status' => $this->publication_status
             ]
         );
     }
@@ -35,9 +35,9 @@ class Publication extends \app\core\Model
         $STMT = self::$_conn->prepare($SQL);
         $STMT->execute([
             'publication_status' => 1,
-            'publication_id' => $this->id
+            'publication_id' => $this->publication_id
         ]);
-        $STMT->setFetchMode(PDO::FETCH_CLASS, 'app\models\Publication');
+        $STMT->setFetchMode(PDO::FETCH_OBJ);
         return $STMT->fetchAll();
     }
     public function getAll()
@@ -45,7 +45,7 @@ class Publication extends \app\core\Model
         $SQL = 'SELECT * FROM publication WHERE publication_status = :publication_status';
         $STMT = self::$_conn->prepare($SQL);
         $STMT->execute(['publication_status' => 1]);
-        $STMT->setFetchMode(PDO::FETCH_CLASS, 'app\models\Publication');
+        $STMT->setFetchMode(PDO::FETCH_OBJ);
         return $STMT->fetchAll();
     }
     public function getByTitle($pTitle)
@@ -58,7 +58,7 @@ class Publication extends \app\core\Model
                 'publication_status' => 1
             ]
         );
-        $STMT->setFetchMode(PDO::FETCH_CLASS, 'app\models\Publication');
+        $STMT->setFetchMode(PDO::FETCH_OBJ);
         return $STMT->fetchAll();
     }
     public function getByContent($pContent)
@@ -71,7 +71,7 @@ class Publication extends \app\core\Model
                 'publication_status' => 1
             ]
         );
-        $STMT->setFetchMode(PDO::FETCH_CLASS, 'app\models\Publication');
+        $STMT->setFetchMode(PDO::FETCH_OBJ);
         return $STMT->fetchAll();
     }
     public function getForOwner()
@@ -79,15 +79,15 @@ class Publication extends \app\core\Model
         $SQL = 'SELECT * FROM publication WHERE profile_id = :profile_id';
         $STMT = self::$_conn->prepare($SQL);
         $STMT->execute(['profile_id' => $this->profile_id]);
-        $STMT->setFetchMode(PDO::FETCH_CLASS, 'app\models\Publication');
+        $STMT->setFetchMode(PDO::FETCH_OBJ);
         return $STMT->fetchAll();
     }
 
     public function getByPublication(){
         $SQL = 'SELECT * FROM publication_comment WHERE publication_id = :publication_id';
         $STMT = self::$_conn->prepare($SQL);
-        $STMT->execute(['publication_id' => $this->id]);
-        $STMT->setFetchMode(PDO::FETCH_CLASS, 'app\models\Comment');
+        $STMT->execute(['publication_id' => $this->publication_id]);
+        $STMT->setFetchMode(PDO::FETCH_OBJ);
         return $STMT->fetchAll();
     }
 
@@ -101,11 +101,11 @@ class Publication extends \app\core\Model
         $STMT = self::$_conn->prepare($SQL);
         $STMT->execute(
             [
-                'publication_id' => $this->id,
-                'publication_title' => $this->title,
+                'publication_id' => $this->publication_id,
+                'publication_title' => $this->publication_title,
                 'timestamp' => $this->timestamp,
-                'publication_status' => $this->status,
-                'publication_text' => $this->text
+                'publication_status' => $this->publication_status,
+                'publication_text' => $this->publication_text
             ]
         );
     }
@@ -114,7 +114,7 @@ class Publication extends \app\core\Model
         $SQL = 'DELETE FROM publication WHERE publication_id = :publication_id';
         $STMT = self::$_conn->prepare($SQL);
         $STMT->execute(
-            ['publication_id' => $this->id]
+            ['publication_id' => $this->publication_id]
         );
     }
 }

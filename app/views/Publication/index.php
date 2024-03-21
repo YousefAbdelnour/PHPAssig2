@@ -41,8 +41,8 @@
     <div class="publications">
     <?php foreach ($data as $publication) : ?>
         <div class="publication">
-            <h2><?php echo $publication->title; ?></h2>
-            <p><?php echo $publication->text; ?></p>
+            <h2><?php echo $publication->publication_title; ?></h2>
+            <p><?php echo $publication->publication_text; ?></p>
         </div>
     <?php endforeach; ?>
     </div>

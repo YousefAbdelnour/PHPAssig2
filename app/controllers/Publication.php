@@ -8,9 +8,9 @@ class Publication extends \app\core\Controller //by youssef
     {
     $publicationModel = new \app\models\Publication();
     $allPublications = $publicationModel->getAll();
-    echo var_dump($allPublications); 
-    $this->view('Publication/index', ['allPublications' => $allPublications]);
+    $this->view('Publication/index', $allPublications);
     }
+
     #[\app\filters\HasProfile]
     #[\app\filters\Login]
     public function create()
@@ -18,12 +18,17 @@ class Publication extends \app\core\Controller //by youssef
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $publication = new \app\models\Publication();
             $publication->profile_id = $_SESSION['profile_id'];
-            $publication->title = $_POST['title'];
-            $publication->text = $_POST['text'];
+            $publication->publication_title = $_POST['title'];
+            $publication->publication_text = $_POST['text'];
             $publication->timestamp = date('Y-m-d H:i:s');
-            $publication->status = $_POST['status'];
+            $publication->publication_status = $_POST['status'];
             $publication->create();
             header('location:/Publication/index');
+            echo($publication->profile_id);
+            echo($publication->publication_title);
+            echo($publication->publication_text);
+            echo($publication->timestamp);
+            echo($publication->publication_status);
         } else {
             $this->view('Publication/create');
         }
@@ -36,10 +41,10 @@ class Publication extends \app\core\Controller //by youssef
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $publication = new \app\models\Publication();
-            $publication->title = $_POST['title'];
-            $publication->text = $_POST['text'];
+            $publication->publication_title = $_POST['title'];
+            $publication->publication_text = $_POST['text'];
             $publication->timestamp = date('Y-m-d H:i:s');
-            $publication->status = $_POST['status'];
+            $publication->publication_status = $_POST['status'];
             $publication->edit();
             header('location:/Publication/index');
         } else {
@@ -53,7 +58,7 @@ class Publication extends \app\core\Controller //by youssef
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $publication = new \app\models\Publication();
-            $publication->id = $_POST['publication_id'];
+            $publication->publication_id = $_POST['publication_id'];
             $publication->delete();
             header('location:/Publication/index');
         } else {
