@@ -17,7 +17,8 @@
 <body>
 
     <!-- Nav bar -->
-    
+    <?php include('app/views/navbar.php'); ?>
+
 
     <h1>Log In</h1>
 

@@ -48,26 +48,28 @@ class Publication extends \app\core\Controller //by youssef
 
     #[\app\filters\HasProfile]
     #[\app\filters\Login]
-    // #[\app\filters\OwnsPublication]
+    #[\app\filters\OwnsPublication]
     public function edit()
     {
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $publication = new \app\models\Publication();
-        $publication->publication_title = $_POST['title'];
-        $publication->publication_text = $_POST['text'];
-        $publication->timestamp = date('Y-m-d H:i:s');
-        $publication->publication_status = $_POST['status'];
-        $publication->edit();
-        header('location:/Publication/index');
-    } else {
-        $this->view('Publication/edit');
-    }
+        $publication->publication_id = $_GET['id'];
+        $publication = $publication->getById();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $publication->publication_title = $_POST['title'];
+            $publication->publication_text = $_POST['text'];
+            $publication->timestamp = date('Y-m-d H:i:s');
+            $publication->publication_status = $_POST['status'];
+            $publication->edit();
+            header('location:/Publication/index');
+        } else {
+            $this->view('Publication/edit', $publication);
+        }
     }
 
 
     #[\app\filters\HasProfile]
     #[\app\filters\Login]
-    // #[\app\filters\OwnsPublication]
+    #[\app\filters\OwnsPublication]
     public function delete() // $publication_id is fetched from the URL
     {
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
@@ -78,7 +80,8 @@ class Publication extends \app\core\Controller //by youssef
         }
     }
 
-
+    #[\app\filters\HasProfile]
+    #[\app\filters\Login]
     public function search()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
@@ -90,5 +93,4 @@ class Publication extends \app\core\Controller //by youssef
             $this->view('Publication/search', $searchResults);
         }
     }
-
 }

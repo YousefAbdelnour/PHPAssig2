@@ -14,9 +14,10 @@
 <body>
     
     <!-- Nav bar --> 
+    <?php include('app/views/navbar.php'); ?>
 
 
-    <h1>Log In</h1> 
+    <h1>Register</h1> 
 
     <!-- Registration page -->
     <form action="/User/register" method="post">

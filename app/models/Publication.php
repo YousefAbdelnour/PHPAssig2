@@ -37,8 +37,8 @@ class Publication extends \app\core\Model
             'publication_status' => 1,
             'publication_id' => $this->publication_id
         ]);
-        $STMT->setFetchMode(PDO::FETCH_OBJ);
-        return $STMT->fetchAll();
+        $STMT->setFetchMode(PDO::FETCH_CLASS, '\app\models\publication');
+        return $STMT->fetch();
     }
     public function getAll()
     {

@@ -6,7 +6,6 @@ class User extends \app\core\Controller
 {
     public function register()
     {
-        echo ('inside register function');
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Create an instance of the User class
@@ -58,6 +57,7 @@ class User extends \app\core\Controller
         if (isset($_SESSION['user_id'])) {
             // Unset the user session variable
             unset($_SESSION['user_id']);
+            unset($_SESSION['profile_id']);
         }
         // Destroy all session data
         session_destroy();

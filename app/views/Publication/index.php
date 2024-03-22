@@ -6,21 +6,32 @@
     <style>
         /* Global styles */
         body {
-            font-size: 18px; /* Set the base font size */
-            margin: 0; /* Remove default margin */
-            padding: 0; /* Remove default padding */
-            width: 100%; /* Make the content take up the entire width of the screen */
-            box-sizing: border-box; /* Include padding and border in the element's total width and height */
+            font-size: 18px;
+            /* Set the base font size */
+            margin: 0;
+            /* Remove default margin */
+            padding: 0;
+            /* Remove default padding */
+            width: 100%;
+            /* Make the content take up the entire width of the screen */
+            box-sizing: border-box;
+            /* Include padding and border in the element's total width and height */
         }
 
         /* Styles for publications */
         .publication {
-            width: 90%; /* Set the width of the publication */
-            margin: 20px auto; /* Center the publication and add space between them */
-            padding: 20px; /* Add padding to the publication */
-            background-color: #f9f9f9; /* Set the background color */
-            border: 1px solid #ccc; /* Add border */
-            text-align: center; /* Center align text */
+            width: 90%;
+            /* Set the width of the publication */
+            margin: 20px auto;
+            /* Center the publication and add space between them */
+            padding: 20px;
+            /* Add padding to the publication */
+            background-color: #f9f9f9;
+            /* Set the background color */
+            border: 1px solid #ccc;
+            /* Add border */
+            text-align: center;
+            /* Center align text */
         }
 
         /* Styles for buttons */
@@ -47,10 +58,12 @@
             padding: 10px;
             background-color: #f9f9f9;
             border: 1px solid #ccc;
-            text-align: center; /* Center align text */
+            text-align: center;
+            /* Center align text */
         }
     </style>
 </head>
+
 <body>
     <!-- Nav bar -->
     <?php include('app/views/navbar.php'); ?>
@@ -61,30 +74,33 @@
     </form>
 
     <h1>Publication Home</h1>
+    <?php echo "<a href='/Publication/create' class='button'>Post</a>"; ?>
 
     <div class="publications">
-    <?php foreach ($data['publications'] as $publication) : ?>
-        <div class="publication">
-            <h1>Publication:</h1>
-            <h2><?php echo "<a href='/Publication/publication?id=$publication->publication_id'>$publication->publication_title</a>"; ?></h2>
-            <p><?php echo $publication->publication_text; ?></p>
-            <?php echo "<a href='/Publication/delete?id=$publication->publication_id' class='button'>Delete</a>"; ?>
-            <?php echo "<a href='/Publication/edit?id=$publication->publication_id' class='button'>Edit</a>"; ?> <!-- Add Edit button -->
-            <?php echo "<a href='/Comment/create?id=$publication->publication_id' class='button'>Comment</a>"; ?>
-            <h3>Comments:</h3>
-            <?php foreach ($data['comments'] as $comment) : ?>
-                <?php if ($comment->publication_id == $publication->publication_id) : ?>
-                    <div class="comment">
-                        <p><?php echo $comment->comment_text; ?></p>
-                        <form method="post" action="/Comment/delete">
-                            <input type="hidden" name="id" value="<?php echo $comment->publication_comment_id; ?>">
-                            <button type="submit" class="button">Delete</button>
-                        </form>
-                    </div>
-                <?php endif; ?>
-            <?php endforeach; ?>
-        </div>
-    <?php endforeach; ?>
-</div>
+        <?php foreach ($data['publications'] as $publication) : ?>
+            <div class="publication">
+                <h1>Publication:</h1>
+                <h2><?php echo "<a href='/Publication/publication?id=$publication->publication_id'>$publication->publication_title</a>"; ?></h2>
+                <p><?php echo $publication->publication_text; ?></p>
+                <?php echo "<a href='/Publication/delete?id=$publication->publication_id' class='button'>Delete</a>"; ?>
+                <?php echo "<a href='/Publication/edit?id=$publication->publication_id' class='button'>Edit</a>"; ?> <!-- Add Edit button -->
+                <?php echo "<a href='/Comment/create?id=$publication->publication_id' class='button'>Comment</a>"; ?>
+                <h3>Comments:</h3>
+                <?php foreach ($data['comments'] as $comment) : ?>
+                    <?php if ($comment->publication_id == $publication->publication_id) : ?>
+                        <div class="comment">
+                            <p><?php echo $comment->comment_text; ?></p>
+                            <form method="post" action="/Comment/delete">
+                                <input type="hidden" name="id" value="<?php echo $comment->publication_comment_id; ?>">
+                                <button type="submit" class="button">Delete</button>
+                                <?php echo "<a href='/Comment/edit?id=$comment->publication_comment_id' class='button'>Edit</a>"; ?>
+                            </form>
+                        </div>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </div>
+        <?php endforeach; ?>
+
+    </div>
 
 </body>
