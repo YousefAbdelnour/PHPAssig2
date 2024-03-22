@@ -51,18 +51,20 @@ class Publication extends \app\core\Controller //by youssef
     // #[\app\filters\OwnsPublication]
     public function edit()
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $publication = new \app\models\Publication();
-            $publication->publication_title = $_POST['title'];
-            $publication->publication_text = $_POST['text'];
-            $publication->timestamp = date('Y-m-d H:i:s');
-            $publication->publication_status = $_POST['status'];
-            $publication->edit();
-            header('location:/Publication/index');
-        } else {
-            $this->view('Publication/edit');
-        }
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $publication = new \app\models\Publication();
+        $publication->publication_title = $_POST['title'];
+        $publication->publication_text = $_POST['text'];
+        $publication->timestamp = date('Y-m-d H:i:s');
+        $publication->publication_status = $_POST['status'];
+        $publication->edit();
+        header('location:/Publication/index');
+    } else {
+        $this->view('Publication/edit');
     }
+    }
+
+
     #[\app\filters\HasProfile]
     #[\app\filters\Login]
     // #[\app\filters\OwnsPublication]
@@ -79,14 +81,14 @@ class Publication extends \app\core\Controller //by youssef
 
     public function search()
     {
-        $searchQuery = $_GET['query'] ?? ''; // Get the search query from the URL, default to empty string if not set
-        $publicationModel = new \app\models\Publication();
-
-        // Use the existing or a modified search method in your model
-        $searchResults['publications'] = $publicationModel->searchPublications($searchQuery);
-        // Assuming you don't need comments for the search results view
-        $searchResults['comments'] = [];
-
-        $this->view('Publication/search', $searchResults); // Point to a new view for search results
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            $searchQuery = $_GET['query'] ?? '';
+            $publicationModel = new \app\models\Publication();
+            $searchResults['publications'] = $publicationModel->searchPublications($searchQuery);
+            // Assuming you don't need comments for the search results view
+            $searchResults['comments'] = [];
+            $this->view('Publication/search', $searchResults);
+        }
     }
+
 }

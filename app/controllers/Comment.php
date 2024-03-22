@@ -42,24 +42,20 @@ class Comment extends \app\core\Controller
     public function delete()
 {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        // Assuming the comment ID is sent via POST
+
         $comment_id = $_POST['id'];
         
-        // Create a new comment instance
         $comment = new \app\models\Comment;
         
-        // Set the comment ID
         $comment->publication_comment_id = $comment_id;
         
-        // Call the delete method on the comment instance
         $comment->delete();
         
-        // Redirect to an appropriate location after deletion
-        header('Location: /Publication/index'); // Redirect to the publication list, adjust as needed
+       
+        header('Location: /Publication/index'); 
         exit();
     } else {
-        // If the request is not a POST request, redirect to an error page or another appropriate action
-        header('Location: /error'); // Adjust the URL as needed
+        header('Location: /error'); 
         exit();
     }
 }

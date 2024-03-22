@@ -92,7 +92,7 @@
                     <div class="comment">
                         <p><?php echo $comment->comment_text; ?></p>
                         <!-- Optional: Add a delete link for the comment if needed -->
-                        <?php echo "<a href='/Comment/delete?id={$comment->$publication_id->comment_id}' class='button'>Delete</a>"; ?>
+                       <?php echo "<a href='/Comment/delete?id={$comment->$publication_id->comment_id}' class='button'>Delete</a>"; ?>
 
                     </div>
                 <?php endif; ?>

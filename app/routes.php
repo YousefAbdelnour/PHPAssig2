@@ -18,3 +18,4 @@ $this->addRoute('Publication/delete/', 'Publication,delete');
 $this->addRoute('Comment/create/', 'Comment,create');
 $this->addRoute('Comment/delete', 'Comment,delete');
 $this->addRoute('Publication/publication', 'Publication,publication');
+$this->addRoute('Publication/search', 'Publication,search');

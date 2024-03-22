@@ -93,23 +93,25 @@ class Publication extends \app\core\Model
     }
 
     public function edit()
-    {
-        $SQL = 'UPDATE publication SET publication_title=:publication_title,
-        timestamp=:timestamp,
-        publication_status=:publication_status,
-        publication_text=:publication_text 
-        WHERE publication_id = :publication_id';
-        $STMT = self::$_conn->prepare($SQL);
-        $STMT->execute(
-            [
-                'publication_id' => $this->publication_id,
-                'publication_title' => $this->publication_title,
-                'timestamp' => $this->timestamp,
-                'publication_status' => $this->publication_status,
-                'publication_text' => $this->publication_text
-            ]
-        );
-    }
+{
+    $SQL = 'UPDATE publication SET publication_title=:publication_title,
+    timestamp=:timestamp,
+    publication_status=:publication_status,
+    publication_text=:publication_text 
+    WHERE publication_id = :publication_id';
+    $STMT = self::$_conn->prepare($SQL);
+    $STMT->execute(
+        [
+            'publication_id' => $this->publication_id,
+            'publication_title' => $this->publication_title,
+            'timestamp' => $this->timestamp,
+            'publication_status' => $this->publication_status,
+            'publication_text' => $this->publication_text
+        ]
+    );
+}
+
+
     public function delete()
     {
         $SQL = 'DELETE FROM publication WHERE publication_id = :publication_id';
@@ -119,14 +121,13 @@ class Publication extends \app\core\Model
         );
     }
 
-    public function searchPublications($query)
+    public function searchPublications($searchQuery)
     {
-        $SQL = 'SELECT * FROM publication 
-            WHERE (publication_title LIKE :query OR publication_text LIKE :query) 
-            AND publication_status = 1';
-        $STMT = self::$_conn->prepare($SQL);
-        $STMT->execute(['query' => '%' . $query . '%']);
-        $STMT->setFetchMode(PDO::FETCH_OBJ);
-        return $STMT->fetchAll();
+        $sql = "SELECT * FROM publication WHERE publication_title LIKE :searchQuery OR publication_text LIKE :searchQuery";
+        $stmt = self::$_conn->prepare($sql);
+        $stmt->bindValue(':searchQuery', '%' . $searchQuery . '%', PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
+
 }
